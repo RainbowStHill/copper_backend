@@ -1,0 +1,7 @@
+config:
+  service:
+    ip: 192.168.1.10
+    port: 1789
+    service_info:
+      id: 1
+      data_center: 1

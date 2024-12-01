@@ -1,0 +1,16 @@
+general:
+  registry_service_master:
+    ip: 127.0.0.1
+    port: 1789
+  registry_service_replica01:
+    ip: 127.0.0.1
+    port: 1790
+    load_balancer:
+      ip: 127.0.0.1
+      port: 1791
+  registry_service_replica02:
+    ip: 127.0.0.1
+    port: 1792
+    load_balancer:
+      ip: 127.0.0.1
+      port: 1793
