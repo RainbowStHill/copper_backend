@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "./pb";
+
+message Service {
+    int32 serviceType = 1;
+    string address = 2;
+    int32 port = 3;
+    int32 weight = 4;
+}
+
+message RegisterReq {
+    Service service = 1;
+}
+
+message RegisterResp {
+    RegisterStatus status = 1;
+}
+
+enum RegisterStatus {
+    SUCCESS = 0; // All registry service have registered the given service.
+    PARTIAL_FAILURE = 1; // Some registry service failed to register the given service.
+    FAILURE = 2; // The current registry service failed to register the given service.
+}
+
+message SyncReq {
+    Service service = 1;
+}
+
+message SyncResp {
+    bool syncSuccess = 1;
+}
+
+message DeregisterReq {
+    Service service = 1;
+}
+
+message DeregisterResp {
+    RegisterStatus status = 1;
+}
+
+message DiscoverReq {
+    int32 instanceNum = 1;
+    int32 serviceType = 2;
+}
+
+message DiscoverResp {
+    int32 instanceNum = 1;
+    repeated Service service = 2;
+}
+
+service Registry {
+    rpc Register(RegisterReq) returns(RegisterResp);
+    rpc Sync(SyncReq) returns(SyncResp);
+    rpc Deregister(DeregisterReq) returns(DeregisterResp);
+    rpc Discover(stream DiscoverReq) returns(stream DiscoverResp);
+}
