@@ -4,6 +4,7 @@ build: protoc
 	go build -o $GOPATH/bin/copper/ ./cmd/*
 
 test:
+	go clean --testcache
 	go test ./test/...
 
 protoc:
