@@ -3,6 +3,7 @@
 package config
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -67,6 +68,20 @@ func GetConfiguration(path string, recordPath []string) any {
 	}
 
 	return records[recordPath[len(recordPath)-1]]
+}
+
+// GetBuiltInTypeConfig gets configuration and cast it to specified type.
+// If configuration not found or the given type is not correct, return an error.
+func GetBuiltInTypeConfig[T int | string](path string, recordPath []string) (*T, error) {
+	record := GetConfiguration(path, recordPath)
+	if record == nil {
+		return nil, fmt.Errorf("record %v not found", recordPath)
+	}
+	if cfg, ok := record.(T); !ok {
+		return nil, fmt.Errorf("illegal type")
+	} else {
+		return &cfg, nil
+	}
 }
 
 func init() {

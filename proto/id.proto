@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "./pb";
+
+// Type of the ID generator.
+enum GeneratorType {
+    SNOWFLAKE = 0;
+}
+
+message IDReq {
+    GeneratorType generator = 1;
+}
+
+message IDResp {
+    string id = 1;
+}
+
+service Identity {
+    rpc GetID(IDReq) returns (IDResp);
+}

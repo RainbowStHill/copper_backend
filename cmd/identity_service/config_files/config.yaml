@@ -1,0 +1,11 @@
+config:
+  service:
+    port: 17890
+  id_generator:
+    snowflake:
+      timestamp_bits: 41
+      data_center_id_bits: 5
+      instance_id_bits: 5
+      incr_id_bits: 12
+      data_center: 0
+      instance: 0
