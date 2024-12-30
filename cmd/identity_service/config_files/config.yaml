@@ -1,6 +1,8 @@
 config:
   service:
     port: 17890
+    appid: "010000" # 01 - identity service, 00 - data center, 00 - instance
+    appkey: "identity_service"
   id_generator:
     snowflake:
       timestamp_bits: 41
