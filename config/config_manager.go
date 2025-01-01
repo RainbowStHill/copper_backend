@@ -9,7 +9,6 @@ import (
 	"strings"
 	"sync"
 	"sync/atomic"
-	"time"
 
 	"github.com/spf13/viper"
 )
@@ -87,18 +86,6 @@ func GetBuiltInTypeConfig[T int | string](path string, recordPath []string) (*T,
 func init() {
 	configurations = make(map[string]*atomic.Value)
 	configLock = new(sync.RWMutex)
-	go func() { // Load configurations from config files.
-		// Refresh configurations for every 5 seconds.
-		ticker := time.NewTicker(5 * time.Second)
-		// All config files are in yaml format
-		viper.SetConfigType("yaml")
-		for {
-			select {
-			case <-ticker.C:
-				refreshConfigurations()
-			}
-		}
-	}()
 }
 
 func refreshConfigurations() {

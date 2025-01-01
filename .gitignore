@@ -27,3 +27,6 @@ go.work.sum
 # certification file
 *.key
 *.pem
+*.crt
+*.csr
+*.srl
